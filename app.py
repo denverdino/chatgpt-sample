@@ -6,8 +6,8 @@ import os
 import openai
 import requests
 from flask import Flask, render_template, request, flash, jsonify
-import re
- 
+
+
 app = Flask(__name__)
 app.secret_key = 'security-guard'
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -47,4 +47,4 @@ def index():
  
  
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=6666, debug=True)
+    app.run(host='0.0.0.0', port=5000)
