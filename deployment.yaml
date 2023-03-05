@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatgpt-sample
+  labels:
+    app: chatgpt-sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatgpt-sample
+  template:
+    metadata:
+      labels:
+        app: chatgpt-sample
+    spec:
+      containers:
+      - name: chatbot-frontend
+        image: registry-vpc.us-east-1.aliyuncs.com/denverdino/chatgpt-sample
+        ports:
+        - containerPort: 5000
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-apikey
+              key: apiKey
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatgpt-sample
+spec:
+  type: LoadBalancer
+  selector:
+    app: chatgpt-sample
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+
