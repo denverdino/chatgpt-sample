@@ -1,6 +1,6 @@
 # chatgpt-sample
 
-A toy project
+A toy project with many limitations for quick prototype only
 
 
 ## Build image
